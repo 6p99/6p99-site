@@ -1,9 +1,18 @@
-export async function onRequestGet({ env }) {
+export async function onRequestGet({ env, request }) {
   try {
-    const raw = await env.GUESTBOOK_KV.get('visit_count');
-    let count = raw ? parseInt(raw, 10) : 0;
-    count += 1;
-    await env.GUESTBOOK_KV.put('visit_count', String(count));
+    const userIP = request.headers.get("CF-Connecting-IP") || "anonymous";
+    const visitKey = `visit:${userIP}`;
+
+    const rawCount = await env.GUESTBOOK_KV.get('visit_count');
+    let count = rawCount ? parseInt(rawCount, 10) : 0;
+
+    const hasVisited = await env.GUESTBOOK_KV.get(visitKey);
+
+    if (!hasVisited) {
+      count += 1;
+      await env.GUESTBOOK_KV.put('visit_count', String(count));
+      await env.GUESTBOOK_KV.put(visitKey, 'true'); 
+    }
 
     return new Response(JSON.stringify({ count }), {
       headers: { 'content-type': 'application/json' }
