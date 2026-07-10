@@ -4,53 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>projects — 6p99</title>
-<meta name="description" content="MJ (6p99) — projects and repositories, live from GitHub.">
+<meta name="description" content="MJ (6p99) — projects, live from GitHub.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="projects">
-<div class="grain"></div>
+<div class="noise"></div>
 
-<div class="statusbar">
-  <div class="statusbar-inner">
-    <a class="sb-session" href="index.html">6p</a>
-    <nav class="sb-tabs">
-      <a class="sb-tab" data-page="home" href="index.html"><span data-i18n="nav.home">home</span></a>
-      <a class="sb-tab" data-page="about" href="about.html"><span data-i18n="nav.about">about</span></a>
-      <a class="sb-tab" data-page="projects" href="projects.html"><span data-i18n="nav.projects">projects</span></a>
-      <a class="sb-tab" data-page="blog" href="blog.html"><span data-i18n="nav.blog">blog</span></a>
-      <a class="sb-tab" data-page="guestbook" href="guestbook.html"><span data-i18n="nav.guestbook">guestbook</span></a>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">6P99</div>
+    <nav class="navlinks">
+      <a data-page="home" href="index.html"><span data-i18n="nav.home">home</span></a><span class="sep">/</span>
+      <a data-page="about" href="about.html"><span data-i18n="nav.about">about</span></a><span class="sep">/</span>
+      <a data-page="projects" href="projects.html"><span data-i18n="nav.projects">projects</span></a><span class="sep">/</span>
+      <a data-page="blog" href="blog.html"><span data-i18n="nav.blog">blog</span></a><span class="sep">/</span>
+      <a data-page="guestbook" href="guestbook.html"><span data-i18n="nav.guestbook">guestbook</span></a>
     </nav>
-    <div class="sb-right">
-      <div class="sb-clock" id="clock">--:--</div>
+    <div class="topright">
+      <div class="clock" id="clock">--:--</div>
       <button id="langToggle" type="button">AR</button>
     </div>
   </div>
 </div>
 
 <main>
-  <section class="pane">
-    <div class="wrap reveal">
+  <div class="wrap">
+    <div class="page-head">
       <h1 class="page-title" data-i18n="projects.title">projects</h1>
-      <div class="card">
-        <div class="card-head ltr"><span class="ch-label">repos</span><span class="ch-label">github.com/6p99</span></div>
+    </div>
+    <div class="bento" style="margin-top:20px;">
+      <div class="tile tile-full">
+        <div class="tile-label ltr">repos</div>
         <div class="ltr" id="ghRepoList">
           <div class="status-fallback" data-i18n="repos.loading">loading repositories from GitHub…</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </main>
 
 <footer class="ltr">
   <div class="footer-links">
     <a href="https://github.com/6p99" target="_blank" rel="noopener">GitHub</a>
     <a href="https://discord.gg/lanyard" target="_blank" rel="noopener">Discord</a>
-  </div>
-  <div class="ltr" style="margin-top:10px; font-size:11px; color:var(--dimmer);">
-    <span id="visitCount">—</span> <span data-i18n="visits.label">visits</span>
   </div>
 </footer>
 

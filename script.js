@@ -1,4 +1,3 @@
-/* ================= i18n ================= */
 let lastToml = null;
 const translations = {
   "nav.home": {en:"home", ar:"الرئيسية"},
@@ -8,8 +7,6 @@ const translations = {
   "nav.guestbook": {en:"guestbook", ar:"سجل الزوار"},
 
   "hero.answer": {en:"Discord bot developer.", ar:"مطوّر بوتات ديسكورد."},
-  "hero.sub": {en:"Node.js · discord.js v14 · Python — mostly built on Termux.", ar:"Node.js · discord.js v14 · Python — أغلب الشغل مبني على Termux."},
-  "hero.scroll": {en:"scroll", ar:"انزل"},
 
   "home.nav.about.title": {en:"about", ar:"الهوية"},
   "home.nav.about.desc": {en:"identity.toml, live from GitHub", ar:"identity.toml، حي من GitHub"},
@@ -20,24 +17,19 @@ const translations = {
   "home.nav.guestbook.title": {en:"guestbook", ar:"سجل الزوار"},
   "home.nav.guestbook.desc": {en:"leave a message", ar:"اترك رسالة"},
 
-  "section.status.title": {en:"live status", ar:"الحالة الحية"},
-  "status.connecting": {en:"connecting to live status…", ar:"جاري الاتصال بالحالة الحية…"},
+  "status.connecting": {en:"connecting…", ar:"جاري الاتصال…"},
+  "status.label": {en:"live status", ar:"الحالة الحية"},
+  "repos.label": {en:"repos", ar:"المستودعات"},
+  "visits.label": {en:"visits", ar:"زيارة"},
 
-  "profile.about.label": {en:"about me", ar:"نبذة عني"},
-  "profile.connections.label": {en:"connections", ar:"الحسابات"},
-  "pa.message": {en:"Message", ar:"مراسلة"},
-  "pa.github": {en:"GitHub", ar:"GitHub"},
-
-  "about.title": {en:"about", ar:"الهوية"},
-  "blog.lede": {en:"Devlogs and notes", ar:"مقالات وملاحظات"},
   "section.identity.title": {en:"identity.toml", ar:"identity.toml"},
   "section.identity.loading": {en:"pulling from GitHub…", ar:"جاري السحب من GitHub…"},
   "section.stack.title": {en:"stack", ar:"الأدوات"},
 
-  "projects.title": {en:"projects", ar:"المشاريع"},
   "repos.loading": {en:"loading repositories from GitHub…", ar:"جاري تحميل المستودعات من GitHub…"},
 
   "blog.title": {en:"blog", ar:"المدونة"},
+  "blog.lede": {en:"Devlogs and notes", ar:"مقالات وملاحظات"},
   "blog.empty.title": {en:"nothing published yet", ar:"ولا مقالة منشورة لسا"},
   "blog.empty.desc": {en:"check back later, or follow the GitHub activity in the meantime.", ar:"ارجع لاحقاً، أو تابع نشاطي على GitHub لحد هيك."},
 
@@ -47,9 +39,10 @@ const translations = {
   "gb.submit": {en:"sign the guestbook", ar:"وقّع بسجل الزوار"},
   "gb.empty": {en:"no messages yet — be the first.", ar:"ولا رسالة لسا — كون أول وحد."},
   "gb.notConfigured": {en:"guestbook backend isn't connected yet.", ar:"سجل الزوار مش موصول بقاعدة بيانات لسا."},
-  "visits.label": {en:"visits", ar:"زيارة"},
 
-  "contact.title": {en:"contact", ar:"تواصل"}
+  "contact.title": {en:"contact", ar:"تواصل"},
+  "about.title": {en:"about", ar:"الهوية"},
+  "projects.title": {en:"projects", ar:"المشاريع"}
 };
 
 const extra = {
@@ -98,17 +91,13 @@ function applyLang(lang){
 document.addEventListener('DOMContentLoaded', ()=>{
   const toggle = document.getElementById('langToggle');
   if(toggle) toggle.addEventListener('click', ()=> applyLang(currentLang === 'en' ? 'ar' : 'en'));
-
-  /* mark active nav tab based on current page */
   const page = document.body.dataset.page;
-  document.querySelectorAll('.sb-tab').forEach(tab=>{
+  document.querySelectorAll('.navlinks a').forEach(tab=>{
     if(tab.dataset.page === page) tab.classList.add('active');
   });
-
   applyLang(currentLang);
 });
 
-/* ================= clock (Amman time) ================= */
 (function(){
   function tick(){
     const el = document.getElementById('clock');
@@ -119,17 +108,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   tick(); setInterval(tick, 1000);
 })();
 
-/* ================= scroll reveal ================= */
-(function(){
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold:.12 });
-  document.addEventListener('DOMContentLoaded', ()=>{
-    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
-  });
-})();
-
-/* ================= live identity.toml from GitHub README ================= */
 let identityStatus = 'loading';
 (function(){
   const README_URL = 'https://raw.githubusercontent.com/6p99/6p99/main/README.md';
@@ -168,23 +146,21 @@ function renderIdentity(){
   else box.textContent = translations["section.identity.loading"][currentLang];
 }
 
-/* ================= Lanyard live discord status -> profile card ================= */
 let lanyardStatus = 'loading';
 let lastLanyardData = null;
 (function(){
   const DISCORD_ID = '803662340465229855';
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   window.renderLanyard = function(){
-    const avatar = document.getElementById('pfAvatar');
-    const dot = document.getElementById('pfStatusDot');
-    const name = document.getElementById('pfName');
-    const handle = document.getElementById('pfHandle');
-    const activity = document.getElementById('pfActivity');
-    if(!avatar) return; // profile card not on this page
-
-    if(lanyardStatus !== 'ok' || !lastLanyardData){
-      dot.className = 'profile-status-dot offline';
-      if(activity) activity.textContent = '';
+    const box = document.getElementById('lanyardBox');
+    if(!box) return;
+    if(lanyardStatus === 'loading'){
+      box.innerHTML = `<div class="status-fallback">${translations["status.connecting"][currentLang]}</div>`;
+      return;
+    }
+    if(lanyardStatus === 'error' || !lastLanyardData){
+      box.innerHTML = `<div class="status-fallback">${extra.statusFallback[currentLang]}</div>`;
       return;
     }
     const data = lastLanyardData;
@@ -192,24 +168,29 @@ let lastLanyardData = null;
     const avatarUrl = u.avatar
       ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith('a_')?'gif':'png'}?size=128`
       : `https://cdn.discordapp.com/embed/avatars/0.png`;
-    avatar.src = avatarUrl;
     const status = data.discord_status || 'offline';
-    dot.className = `profile-status-dot ${status}`;
-    name.textContent = u.global_name || u.username;
-    handle.textContent = '@' + u.username;
+    let activityLine = '';
+    const spotify = data.listening_to_spotify ? data.spotify : null;
+    const activity = (data.activities || []).find(a => a.type !== 4 && a.name !== 'Spotify');
+    if(spotify) activityLine = `<div class="activity">♪ ${escapeHtml(spotify.song)} — ${escapeHtml(spotify.artist)}</div>`;
+    else if(activity) activityLine = `<div class="activity">${escapeHtml(activity.name)}</div>`;
 
-    if(activity){
-      let line = '';
-      const spotify = data.listening_to_spotify ? data.spotify : null;
-      const act = (data.activities || []).find(a => a.type !== 4 && a.name !== 'Spotify');
-      if(spotify) line = `♪ ${spotify.song} — ${spotify.artist}`;
-      else if(act) line = act.name;
-      activity.textContent = line;
-    }
+    box.innerHTML = `
+      <div class="status-card">
+        <div class="status-avatar-wrap">
+          <img class="status-avatar" src="${avatarUrl}" alt="avatar">
+          <span class="status-dot ${status}"></span>
+        </div>
+        <div class="status-text">
+          <div class="name">${escapeHtml(u.global_name || u.username)}</div>
+          <div class="state">${extra.stateLabel[status] ? extra.stateLabel[status][currentLang] : status}</div>
+          ${activityLine}
+        </div>
+      </div>`;
   };
 
   window.loadLanyard = async function(){
-    if(!document.getElementById('pfAvatar')) return;
+    if(!document.getElementById('lanyardBox')) return;
     try{
       const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
       const json = await res.json();
@@ -221,41 +202,39 @@ let lastLanyardData = null;
   };
 
   document.addEventListener('DOMContentLoaded', ()=>{
-    if(document.getElementById('pfAvatar')){
+    if(document.getElementById('lanyardBox')){
       loadLanyard();
       setInterval(loadLanyard, 25000);
     }
   });
 })();
 
-/* ================= live GitHub repos ================= */
 let reposStatus = 'loading';
 let lastRepos = null;
 (function(){
   window.renderRepos = function(){
     const list = document.getElementById('ghRepoList');
-    if(!list) return;
-    if(reposStatus === 'loading'){
-      list.innerHTML = `<div class="status-fallback">${translations["repos.loading"][currentLang]}</div>`;
-      return;
+    if(list){
+      if(reposStatus === 'loading'){
+        list.innerHTML = `<div class="status-fallback">${translations["repos.loading"][currentLang]}</div>`;
+      }else if(reposStatus === 'error'){
+        list.innerHTML = `<div class="status-fallback">${extra.repoError[currentLang]}</div>`;
+      }else if(!lastRepos || lastRepos.length === 0){
+        list.innerHTML = `<div class="status-fallback">${extra.repoEmpty[currentLang]}</div>`;
+      }else{
+        list.innerHTML = lastRepos.map(r => `
+          <div class="gh-repo">
+            <a class="r-name" href="${r.html_url}" target="_blank" rel="noopener">${r.name}</a>
+            <span class="r-meta">★ ${r.stargazers_count} · ${r.language || '—'}</span>
+          </div>`).join('');
+      }
     }
-    if(reposStatus === 'error'){
-      list.innerHTML = `<div class="status-fallback">${extra.repoError[currentLang]}</div>`;
-      return;
-    }
-    if(!lastRepos || lastRepos.length === 0){
-      list.innerHTML = `<div class="status-fallback">${extra.repoEmpty[currentLang]}</div>`;
-      return;
-    }
-    list.innerHTML = lastRepos.map(r => `
-      <div class="gh-repo">
-        <a class="r-name" href="${r.html_url}" target="_blank" rel="noopener">${r.name}</a>
-        <span class="r-meta">★ ${r.stargazers_count} · ${r.language || '—'}</span>
-      </div>`).join('');
+    const countEl = document.getElementById('repoCount');
+    if(countEl) countEl.textContent = reposStatus === 'ok' && lastRepos ? lastRepos.length : '—';
   };
 
   window.loadRepos = function(){
-    if(!document.getElementById('ghRepoList')) return;
+    if(!document.getElementById('ghRepoList') && !document.getElementById('repoCount')) return;
     fetch('https://api.github.com/users/6p99/repos?sort=updated&per_page=10')
       .then(r => r.json())
       .then(repos => { lastRepos = Array.isArray(repos) ? repos : []; reposStatus = 'ok'; renderRepos(); })
@@ -264,8 +243,7 @@ let lastRepos = null;
   document.addEventListener('DOMContentLoaded', loadRepos);
 })();
 
-/* ================= guestbook (shared, via /api/guestbook) ================= */
-let guestbookStatus = 'loading'; // loading | ok | error
+let guestbookStatus = 'loading';
 let lastGuestbookEntries = [];
 (function(){
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -274,15 +252,15 @@ let lastGuestbookEntries = [];
     const list = document.getElementById('gbList');
     if(!list) return;
     if(guestbookStatus === 'loading'){
-      list.innerHTML = `<div class="status-fallback" style="padding:20px;">${translations["repos.loading"][currentLang]}</div>`;
+      list.innerHTML = `<div class="status-fallback" style="padding:20px 0;">${translations["repos.loading"][currentLang]}</div>`;
       return;
     }
     if(guestbookStatus === 'error'){
-      list.innerHTML = `<div class="status-fallback" style="padding:20px;">${translations["gb.notConfigured"][currentLang]}</div>`;
+      list.innerHTML = `<div class="status-fallback" style="padding:20px 0;">${translations["gb.notConfigured"][currentLang]}</div>`;
       return;
     }
     if(!lastGuestbookEntries || lastGuestbookEntries.length === 0){
-      list.innerHTML = `<div class="status-fallback" style="padding:20px;">${translations["gb.empty"][currentLang]}</div>`;
+      list.innerHTML = `<div class="status-fallback" style="padding:20px 0;">${translations["gb.empty"][currentLang]}</div>`;
       return;
     }
     list.innerHTML = lastGuestbookEntries.slice().reverse().map(e => `
@@ -333,7 +311,6 @@ let lastGuestbookEntries = [];
   });
 })();
 
-/* ================= visit counter (shared, via /api/visits) ================= */
 (function(){
   document.addEventListener('DOMContentLoaded', async ()=>{
     const el = document.getElementById('visitCount');
@@ -349,7 +326,6 @@ let lastGuestbookEntries = [];
   });
 })();
 
-/* ================= refresh dynamic text on lang switch ================= */
 function refreshDynamicText(){
   renderIdentity();
   renderLanyard();
