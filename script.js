@@ -135,6 +135,35 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 (function(){
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const el = document.querySelector('.sb-tabs');
+    if(!el) return;
+    let isDown = false, startX = 0, startScroll = 0, moved = 0;
+
+    const down = (x)=>{ isDown = true; moved = 0; startX = x; startScroll = el.scrollLeft; el.classList.add('dragging'); };
+    const move = (x)=>{
+      if(!isDown) return;
+      const delta = x - startX;
+      moved = Math.max(moved, Math.abs(delta));
+      el.scrollLeft = startScroll - delta;
+    };
+    const up = ()=>{ isDown = false; el.classList.remove('dragging'); };
+
+    el.addEventListener('mousedown', (e)=> down(e.pageX));
+    window.addEventListener('mousemove', (e)=> move(e.pageX));
+    window.addEventListener('mouseup', up);
+
+    el.addEventListener('touchstart', (e)=> down(e.touches[0].pageX), { passive:true });
+    el.addEventListener('touchmove', (e)=> move(e.touches[0].pageX), { passive:true });
+    el.addEventListener('touchend', up);
+
+    el.addEventListener('click', (e)=>{
+      if(moved > 6){ e.preventDefault(); e.stopPropagation(); }
+    }, true);
+  });
+})();
+
+(function(){
   function tick(){
     const el = document.getElementById('clock');
     if(!el) return;

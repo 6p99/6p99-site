@@ -265,3 +265,6 @@ footer{ padding:28px 0 48px; text-align:center; font-size:11px; color:var(--dimm
 @media (hover:none) and (pointer:coarse){
   .sb-tab, #langToggle, #themeToggle, .design-switch, .gb-form button, .pa-btn, .server-join{ min-height:40px; }
 }
+
+.sb-tabs.dragging{ cursor:grabbing; user-select:none; scroll-behavior:auto; }
+.sb-tabs{ cursor:grab; }
