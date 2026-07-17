@@ -49,17 +49,17 @@ main{ flex:1; }
 .topright{ display:flex; align-items:center; gap:10px; }
 .clock{ font-size:11px; color:var(--dimmer); }
 #langToggle{
-  height:30px; padding:0 14px; border:1px solid var(--line); background:transparent; color:var(--white);
+  height:34px; padding:0 14px; border:1px solid var(--line); background:transparent; color:var(--white);
   font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; cursor:pointer;
 }
 #langToggle:hover{ background:var(--white); color:var(--bg); }
 #themeToggle{
-  height:30px; padding:0 14px; border:1px solid var(--line); background:transparent; color:var(--white);
+  height:34px; padding:0 14px; border:1px solid var(--line); background:transparent; color:var(--white);
   font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; cursor:pointer; text-transform:uppercase;
 }
 #themeToggle:hover{ background:var(--white); color:var(--bg); }
 .design-switch{
-  height:30px; padding:0 14px; border:1px solid var(--line); display:flex; align-items:center;
+  height:34px; padding:0 14px; border:1px solid var(--line); display:flex; align-items:center;
   color:var(--white); font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
 }
 .design-switch:hover{ background:var(--white); color:var(--bg); }
@@ -151,20 +151,20 @@ pre.code{ font-family:var(--mono); font-size:12px; color:#c9c9c7; white-space:pr
 .gb-form{ display:flex; flex-direction:column; gap:10px; }
 .gb-form input,.gb-form textarea{
   background:var(--tile-2); border:1px solid var(--line); color:var(--white);
-  font-family:var(--mono); font-size:13px; padding:12px 14px; width:100%; resize:vertical;
+  font-family:var(--mono); font-size:16px; padding:12px 14px; width:100%; resize:vertical;
 }
 .gb-form input:focus,.gb-form textarea:focus{ outline:none; border-color:var(--line-bright); }
 .gb-form button{
   align-self:flex-start; background:var(--white); color:var(--bg); border:none;
   font-family:var(--mono); font-weight:700; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
-  padding:12px 22px; cursor:pointer;
+  padding:12px 22px; cursor:pointer; min-height:44px;
 }
 .gb-form button:hover{ background:#d0d0d0; }
 .gb-entry{ padding:16px 0; border-bottom:1px solid var(--line); }
 .gb-entry:last-child{ border-bottom:none; }
-.gb-entry .gb-name{ font-weight:700; font-size:13px; }
+.gb-entry .gb-name{ font-weight:700; font-size:13px; overflow-wrap:anywhere; }
 .gb-entry .gb-time{ font-size:10px; color:var(--dimmer); margin-inline-start:8px; }
-.gb-entry .gb-msg{ font-size:13.5px; color:#d8d8d6; margin-top:6px; }
+.gb-entry .gb-msg{ font-size:13.5px; color:#d8d8d6; margin-top:6px; overflow-wrap:anywhere; }
 
 .connections{ display:flex; flex-direction:column; }
 .connection{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); transition:opacity .15s ease; }
@@ -188,4 +188,9 @@ footer{ padding:24px; text-align:center; font-size:11px; color:var(--dimmer); bo
 }
 @media (max-width:520px){
   .tile-stat,.tile-nav{ grid-column:span 12; }
+  .server-join{ width:100%; text-align:center; }
+  .server-card{ align-items:flex-start; }
+}
+@media (hover:none) and (pointer:coarse){
+  .navlinks a, #langToggle, #themeToggle, .design-switch, .gb-form button, .server-join{ min-height:40px; }
 }
