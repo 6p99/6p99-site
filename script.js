@@ -153,9 +153,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     window.addEventListener('mousemove', (e)=> move(e.pageX));
     window.addEventListener('mouseup', up);
 
-    el.addEventListener('touchstart', (e)=> down(e.touches[0].pageX), { passive:true });
-    el.addEventListener('touchmove', (e)=> move(e.touches[0].pageX), { passive:true });
-    el.addEventListener('touchend', up);
+    el.addEventListener('wheel', (e)=>{
+      if(Math.abs(e.deltaY) > Math.abs(e.deltaX)){
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    }, { passive:false });
 
     el.addEventListener('click', (e)=>{
       if(moved > 6){ e.preventDefault(); e.stopPropagation(); }
@@ -579,7 +582,7 @@ let authUser = null;
         : `https://cdn.discordapp.com/embed/avatars/0.png`;
       box.innerHTML = `<img src="${avatarUrl}" alt="" style="width:26px;height:26px;border-radius:50%;">
         <span style="font-size:12px;font-weight:700;">${authUser.username}</span>
-        <a href="/api/auth/logout" style="font-size:11px;color:var(--dim);">${translations['auth.logout'][currentLang]}</a>`;
+        <a href="/api/auth/logout" style="font-size:11px;color:rgba(255,255,255,.8);">${translations['auth.logout'][currentLang]}</a>`;
     }else{
       box.innerHTML = `<a href="/api/auth/login" style="font-size:12px;font-weight:700;">${translations['auth.login'][currentLang]}</a>`;
     }

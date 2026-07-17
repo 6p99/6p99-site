@@ -517,7 +517,7 @@ let authUser = null;
         : `https://cdn.discordapp.com/embed/avatars/0.png`;
       box.innerHTML = `<img src="${avatarUrl}" alt="" style="width:24px;height:24px;border-radius:50%;">
         <span style="font-size:11px;font-weight:700;">${authUser.username}</span>
-        <a href="/api/auth/logout" style="font-size:11px;color:var(--dim);">${translations['auth.logout'][currentLang]}</a>`;
+        <a href="/api/auth/logout" style="font-size:11px;color:rgba(255,255,255,.8);">${translations['auth.logout'][currentLang]}</a>`;
     }else{
       box.innerHTML = `<a href="/api/auth/login" style="font-size:11px;font-weight:700;">${translations['auth.login'][currentLang]}</a>`;
     }
