@@ -8,8 +8,6 @@ const translations = {
   "nav.guestbook": {en:"guestbook", ar:"سجل الزوار"},
 
   "hero.answer": {en:"Discord bot developer.", ar:"مطوّر بوتات ديسكورد."},
-  "hero.sub": {en:"Node.js · discord.js v14 · Python — mostly built on Termux.", ar:"Node.js · discord.js v14 · Python — أغلب الشغل مبني على Termux."},
-  "hero.scroll": {en:"scroll", ar:"انزل"},
 
   "home.nav.about.title": {en:"about", ar:"الهوية"},
   "home.nav.about.desc": {en:"identity.toml, live from GitHub", ar:"identity.toml، حي من GitHub"},
@@ -20,33 +18,23 @@ const translations = {
   "home.nav.guestbook.title": {en:"guestbook", ar:"سجل الزوار"},
   "home.nav.guestbook.desc": {en:"leave a message", ar:"اترك رسالة"},
 
-  "section.status.title": {en:"live status", ar:"الحالة الحية"},
-  "status.connecting": {en:"connecting to live status…", ar:"جاري الاتصال بالحالة الحية…"},
+  "status.connecting": {en:"connecting…", ar:"جاري الاتصال…"},
+  "server.online": {en:"online", ar:"متصل"},
+  "server.members": {en:"members", ar:"عضو"},
+  "server.error": {en:"couldn't load server stats", ar:"تعذّر تحميل إحصائيات السيرفر"},
+  "server.join": {en:"Join", ar:"انضم"},
+  "status.label": {en:"live status", ar:"الحالة الحية"},
+  "repos.label": {en:"repos", ar:"المستودعات"},
+  "visits.label": {en:"visits", ar:"زيارة"},
 
-  "profile.about.label": {en:"about me", ar:"نبذة عني"},
-  "profile.connections.label": {en:"connections", ar:"الحسابات"},
-  "pa.message": {en:"Message", ar:"مراسلة"},
-  "pa.github": {en:"GitHub", ar:"GitHub"},
-
-  "about.title": {en:"about", ar:"الهوية"},
-  "blog.lede": {en:"Devlogs and notes", ar:"مقالات وملاحظات"},
   "section.identity.title": {en:"identity.toml", ar:"identity.toml"},
   "section.identity.loading": {en:"pulling from GitHub…", ar:"جاري السحب من GitHub…"},
   "section.stack.title": {en:"stack", ar:"الأدوات"},
 
-  "projects.title": {en:"projects", ar:"المشاريع"},
-  "servers.title": {en:"servers", ar:"السيرفرات"},
-  "servers.empty": {en:"no servers added yet.", ar:"ولا سيرفر مضاف لسا."},
-  "servers.alreadyAdded": {en:"this server is already on the list.", ar:"هاد السيرفر مضاف أصلاً."},
-  "servers.addError": {en:"couldn't add that server — check the invite link.", ar:"ما قدرت أضيف السيرفر — تأكد من رابط الدعوة."},
-  "srv.invite.placeholder": {en:"invite link or code", ar:"رابط أو كود الدعوة"},
-  "srv.desc.placeholder": {en:"short description (optional)", ar:"وصف قصير (اختياري)"},
-  "srv.submit": {en:"add server", ar:"ضيف سيرفر"},
-  "auth.login": {en:"login", ar:"دخول"},
-  "auth.logout": {en:"logout", ar:"خروج"},
   "repos.loading": {en:"loading repositories from GitHub…", ar:"جاري تحميل المستودعات من GitHub…"},
 
   "blog.title": {en:"blog", ar:"المدونة"},
+  "blog.lede": {en:"Devlogs and notes", ar:"مقالات وملاحظات"},
   "blog.empty.title": {en:"nothing published yet", ar:"ولا مقالة منشورة لسا"},
   "blog.empty.desc": {en:"check back later, or follow the GitHub activity in the meantime.", ar:"ارجع لاحقاً، أو تابع نشاطي على GitHub لحد هيك."},
 
@@ -57,13 +45,19 @@ const translations = {
   "gb.empty": {en:"no messages yet — be the first.", ar:"ولا رسالة لسا — كون أول وحد."},
   "gb.notConfigured": {en:"guestbook backend isn't connected yet.", ar:"سجل الزوار مش موصول بقاعدة بيانات لسا."},
   "gb.rateLimited": {en:"slow down — wait a bit before signing again.", ar:"شوي شوي — استنى شوي قبل ما توقّع مرة تانية."},
-  "server.online": {en:"online", ar:"متصل"},
-  "server.members": {en:"members", ar:"عضو"},
-  "server.error": {en:"couldn't load server stats", ar:"تعذّر تحميل إحصائيات السيرفر"},
-  "server.join": {en:"Join", ar:"انضم"},
-  "visits.label": {en:"visits", ar:"زيارة"},
 
-  "contact.title": {en:"contact", ar:"تواصل"}
+  "contact.title": {en:"contact", ar:"تواصل"},
+  "about.title": {en:"about", ar:"الهوية"},
+  "projects.title": {en:"projects", ar:"المشاريع"},
+  "servers.title": {en:"servers", ar:"السيرفرات"},
+  "servers.empty": {en:"no servers added yet.", ar:"ولا سيرفر مضاف لسا."},
+  "servers.alreadyAdded": {en:"this server is already on the list.", ar:"هاد السيرفر مضاف أصلاً."},
+  "servers.addError": {en:"couldn't add that server — check the invite link.", ar:"ما قدرت أضيف السيرفر — تأكد من رابط الدعوة."},
+  "srv.invite.placeholder": {en:"invite link or code", ar:"رابط أو كود الدعوة"},
+  "srv.desc.placeholder": {en:"short description (optional)", ar:"وصف قصير (اختياري)"},
+  "srv.submit": {en:"add server", ar:"ضيف سيرفر"},
+  "auth.login": {en:"login", ar:"دخول"},
+  "auth.logout": {en:"logout", ar:"خروج"}
 };
 
 const extra = {
@@ -121,16 +115,13 @@ function applyLang(lang){
 document.addEventListener('DOMContentLoaded', ()=>{
   const toggle = document.getElementById('langToggle');
   if(toggle) toggle.addEventListener('click', ()=> applyLang(currentLang === 'en' ? 'ar' : 'en'));
-
   const themeBtn = document.getElementById('themeToggle');
   if(themeBtn) themeBtn.addEventListener('click', ()=> applyTheme(currentTheme === 'light' ? 'dark' : 'light'));
   applyTheme(currentTheme);
-
   const page = document.body.dataset.page;
-  document.querySelectorAll('.sb-tab').forEach(tab=>{
+  document.querySelectorAll('.navlinks a').forEach(tab=>{
     if(tab.dataset.page === page) tab.classList.add('active');
   });
-
   applyLang(currentLang);
 });
 
@@ -142,15 +133,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     el.textContent = fmt.format(new Date()) + ' AMM';
   }
   tick(); setInterval(tick, 1000);
-})();
-
-(function(){
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold:.12 });
-  document.addEventListener('DOMContentLoaded', ()=>{
-    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
-  });
 })();
 
 let identityStatus = 'loading';
@@ -183,28 +165,10 @@ let identityStatus = 'loading';
   });
 })();
 
-let identityTyped = false;
-function typeText(el, text){
-  el.textContent = '';
-  let i = 0;
-  const step = ()=>{
-    i += 3;
-    el.textContent = text.slice(0, i);
-    if(i < text.length) requestAnimationFrame(step);
-  };
-  step();
-}
 function renderIdentity(){
   const box = document.getElementById('identityBox');
   if(!box) return;
-  if(identityStatus === 'ok'){
-    if(!identityTyped){
-      identityTyped = true;
-      typeText(box, lastToml);
-    }else{
-      box.textContent = lastToml;
-    }
-  }
+  if(identityStatus === 'ok') box.textContent = lastToml;
   else if(identityStatus === 'error') box.textContent = extra.identityError[currentLang];
   else box.textContent = translations["section.identity.loading"][currentLang];
 }
@@ -213,18 +177,17 @@ let lanyardStatus = 'loading';
 let lastLanyardData = null;
 (function(){
   const DISCORD_ID = '803662340465229855';
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   window.renderLanyard = function(){
-    const avatar = document.getElementById('pfAvatar');
-    const dot = document.getElementById('pfStatusDot');
-    const name = document.getElementById('pfName');
-    const handle = document.getElementById('pfHandle');
-    const activity = document.getElementById('pfActivity');
-    if(!avatar) return; // profile card not on this page
-
-    if(lanyardStatus !== 'ok' || !lastLanyardData){
-      dot.className = 'profile-status-dot offline';
-      if(activity) activity.textContent = '';
+    const box = document.getElementById('lanyardBox');
+    if(!box) return;
+    if(lanyardStatus === 'loading'){
+      box.innerHTML = `<div class="status-fallback">${translations["status.connecting"][currentLang]}</div>`;
+      return;
+    }
+    if(lanyardStatus === 'error' || !lastLanyardData){
+      box.innerHTML = `<div class="status-fallback">${extra.statusFallback[currentLang]}</div>`;
       return;
     }
     const data = lastLanyardData;
@@ -232,24 +195,29 @@ let lastLanyardData = null;
     const avatarUrl = u.avatar
       ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith('a_')?'gif':'png'}?size=128`
       : `https://cdn.discordapp.com/embed/avatars/0.png`;
-    avatar.src = avatarUrl;
     const status = data.discord_status || 'offline';
-    dot.className = `profile-status-dot ${status}`;
-    name.textContent = u.global_name || u.username;
-    handle.textContent = '@' + u.username;
+    let activityLine = '';
+    const spotify = data.listening_to_spotify ? data.spotify : null;
+    const activity = (data.activities || []).find(a => a.type !== 4 && a.name !== 'Spotify');
+    if(spotify) activityLine = `<div class="activity">♪ ${escapeHtml(spotify.song)} — ${escapeHtml(spotify.artist)}</div>`;
+    else if(activity) activityLine = `<div class="activity">${escapeHtml(activity.name)}</div>`;
 
-    if(activity){
-      let line = '';
-      const spotify = data.listening_to_spotify ? data.spotify : null;
-      const act = (data.activities || []).find(a => a.type !== 4 && a.name !== 'Spotify');
-      if(spotify) line = `♪ ${spotify.song} — ${spotify.artist}`;
-      else if(act) line = act.name;
-      activity.textContent = line;
-    }
+    box.innerHTML = `
+      <div class="status-card">
+        <div class="status-avatar-wrap">
+          <img class="status-avatar" src="${avatarUrl}" alt="avatar">
+          <span class="status-dot ${status}"></span>
+        </div>
+        <div class="status-text">
+          <div class="name">${escapeHtml(u.global_name || u.username)}</div>
+          <div class="state">${extra.stateLabel[status] ? extra.stateLabel[status][currentLang] : status}</div>
+          ${activityLine}
+        </div>
+      </div>`;
   };
 
   window.loadLanyard = async function(){
-    if(!document.getElementById('pfAvatar')) return;
+    if(!document.getElementById('lanyardBox')) return;
     try{
       const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
       const json = await res.json();
@@ -261,7 +229,7 @@ let lastLanyardData = null;
   };
 
   document.addEventListener('DOMContentLoaded', ()=>{
-    if(document.getElementById('pfAvatar')){
+    if(document.getElementById('lanyardBox')){
       loadLanyard();
       setInterval(loadLanyard, 25000);
     }
@@ -273,28 +241,27 @@ let lastRepos = null;
 (function(){
   window.renderRepos = function(){
     const list = document.getElementById('ghRepoList');
-    if(!list) return;
-    if(reposStatus === 'loading'){
-      list.innerHTML = `<div class="status-fallback">${translations["repos.loading"][currentLang]}</div>`;
-      return;
+    if(list){
+      if(reposStatus === 'loading'){
+        list.innerHTML = `<div class="status-fallback">${translations["repos.loading"][currentLang]}</div>`;
+      }else if(reposStatus === 'error'){
+        list.innerHTML = `<div class="status-fallback">${extra.repoError[currentLang]}</div>`;
+      }else if(!lastRepos || lastRepos.length === 0){
+        list.innerHTML = `<div class="status-fallback">${extra.repoEmpty[currentLang]}</div>`;
+      }else{
+        list.innerHTML = lastRepos.map(r => `
+          <div class="gh-repo">
+            <a class="r-name" href="${r.html_url}" target="_blank" rel="noopener">${r.name}</a>
+            <span class="r-meta">★ ${r.stargazers_count} · ${r.language || '—'}</span>
+          </div>`).join('');
+      }
     }
-    if(reposStatus === 'error'){
-      list.innerHTML = `<div class="status-fallback">${extra.repoError[currentLang]}</div>`;
-      return;
-    }
-    if(!lastRepos || lastRepos.length === 0){
-      list.innerHTML = `<div class="status-fallback">${extra.repoEmpty[currentLang]}</div>`;
-      return;
-    }
-    list.innerHTML = lastRepos.map(r => `
-      <div class="gh-repo">
-        <a class="r-name" href="${r.html_url}" target="_blank" rel="noopener">${r.name}</a>
-        <span class="r-meta">★ ${r.stargazers_count} · ${r.language || '—'}</span>
-      </div>`).join('');
+    const countEl = document.getElementById('repoCount');
+    if(countEl) countEl.textContent = reposStatus === 'ok' && lastRepos ? lastRepos.length : '—';
   };
 
   window.loadRepos = function(){
-    if(!document.getElementById('ghRepoList')) return;
+    if(!document.getElementById('ghRepoList') && !document.getElementById('repoCount')) return;
     fetch('https://api.github.com/users/6p99/repos?sort=updated&per_page=10')
       .then(r => r.json())
       .then(repos => { lastRepos = Array.isArray(repos) ? repos : []; reposStatus = 'ok'; renderRepos(); })
@@ -303,7 +270,7 @@ let lastRepos = null;
   document.addEventListener('DOMContentLoaded', loadRepos);
 })();
 
-let guestbookStatus = 'loading'; // loading | ok | error
+let guestbookStatus = 'loading';
 let lastGuestbookEntries = [];
 let guestbookMessage = null;
 (function(){
@@ -317,15 +284,15 @@ let guestbookMessage = null;
     const list = document.getElementById('gbList');
     if(!list) return;
     if(guestbookStatus === 'loading'){
-      list.innerHTML = `<div class="status-fallback" style="padding:20px;">${translations["repos.loading"][currentLang]}</div>`;
+      list.innerHTML = `<div class="status-fallback" style="padding:20px 0;">${translations["repos.loading"][currentLang]}</div>`;
       return;
     }
     if(guestbookStatus === 'error'){
-      list.innerHTML = `<div class="status-fallback" style="padding:20px;">${translations["gb.notConfigured"][currentLang]}</div>`;
+      list.innerHTML = `<div class="status-fallback" style="padding:20px 0;">${translations["gb.notConfigured"][currentLang]}</div>`;
       return;
     }
     if(!lastGuestbookEntries || lastGuestbookEntries.length === 0){
-      list.innerHTML = `<div class="status-fallback" style="padding:20px;">${translations["gb.empty"][currentLang]}</div>`;
+      list.innerHTML = `<div class="status-fallback" style="padding:20px 0;">${translations["gb.empty"][currentLang]}</div>`;
       return;
     }
     list.innerHTML = lastGuestbookEntries.slice().reverse().map(e => `
@@ -456,7 +423,7 @@ let lastServers = [];
             ? `https://cdn.discordapp.com/icons/${s.id}/${s.icon}.png?size=64`
             : null;
           const iconHtml = iconUrl
-            ? `<img src="${iconUrl}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`
+            ? `<img src="${iconUrl}" alt="" style="width:100%;height:100%;object-fit:cover;">`
             : s.name.charAt(0).toUpperCase();
           return `
           <div class="server-card ltr">
@@ -548,11 +515,11 @@ let authUser = null;
       const avatarUrl = authUser.avatar
         ? `https://cdn.discordapp.com/avatars/${authUser.id}/${authUser.avatar}.png?size=64`
         : `https://cdn.discordapp.com/embed/avatars/0.png`;
-      box.innerHTML = `<img src="${avatarUrl}" alt="" style="width:26px;height:26px;border-radius:50%;">
-        <span style="font-size:12px;font-weight:700;">${authUser.username}</span>
+      box.innerHTML = `<img src="${avatarUrl}" alt="" style="width:24px;height:24px;border-radius:50%;">
+        <span style="font-size:11px;font-weight:700;">${authUser.username}</span>
         <a href="/api/auth/logout" style="font-size:11px;color:var(--dim);">${translations['auth.logout'][currentLang]}</a>`;
     }else{
-      box.innerHTML = `<a href="/api/auth/login" style="font-size:12px;font-weight:700;">${translations['auth.login'][currentLang]}</a>`;
+      box.innerHTML = `<a href="/api/auth/login" style="font-size:11px;font-weight:700;">${translations['auth.login'][currentLang]}</a>`;
     }
     if(typeof renderServers === 'function') renderServers();
   };

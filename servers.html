@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>blog — 6p99</title>
-<meta name="description" content="MJ (6p99) — devlogs and notes.">
+<title>servers — 6p99</title>
+<meta name="description" content="MJ (6p99) — servers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-page="blog">
+<body data-page="servers">
 <div class="grain"></div>
 
 <div class="statusbar">
@@ -27,7 +27,7 @@
     <div class="sb-right">
       <div id="authBox" class="ltr" style="display:flex;align-items:center;gap:6px;"></div>
       <div class="sb-clock" id="clock">--:--</div>
-      <a class="design-switch" href="ghost/blog.html">bento</a>
+      <a class="design-switch" href="ghost/servers.html">bento</a>
       <button id="themeToggle" type="button">light</button>
       <button id="langToggle" type="button">AR</button>
     </div>
@@ -37,15 +37,17 @@
 <main>
   <section class="pane">
     <div class="wrap reveal">
-      <h1 class="page-title" data-i18n="blog.title">blog</h1>
-      <p class="page-lede prose" data-i18n="blog.lede">Devlogs and notes</p>
-
+      <h1 class="page-title" data-i18n="servers.title">servers</h1>
+      <div id="serverAddWrap" class="card" style="display:none;">
+        <form class="gb-form ltr" id="serverAddForm">
+          <input type="text" id="srvInvite" data-i18n-placeholder="srv.invite.placeholder" placeholder="invite link or code" required>
+          <input type="text" id="srvDesc" data-i18n-placeholder="srv.desc.placeholder" placeholder="short description (optional)">
+          <button type="submit" data-i18n="srv.submit">add server</button>
+        </form>
+        <div id="srvAddNotice" class="status-fallback ltr" style="margin-top:10px;"></div>
+      </div>
       <div class="card">
-        <div class="empty-state">
-          <div class="glyph">[ ]</div>
-          <div style="font-weight:700; color:var(--white); margin-bottom:6px;" data-i18n="blog.empty.title">nothing published yet</div>
-          <div data-i18n="blog.empty.desc">check back later, or follow the GitHub activity in the meantime.</div>
-        </div>
+        <div id="serverGrid" style="display:flex; flex-direction:column; gap:12px;"></div>
       </div>
     </div>
   </section>

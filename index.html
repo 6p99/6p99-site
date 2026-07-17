@@ -4,104 +4,129 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>6p99 — MJ</title>
-<meta name="description" content="MJ (6p99) — Discord bot developer based in Amman, Jordan.">
+<meta name="description" content="MJ (6p99) — Discord bot developer based in Amman, Jordan. Node.js / discord.js / Python.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="home">
-<div class="noise"></div>
+<div class="grain"></div>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="logo">6P99</div>
-    <nav class="navlinks">
-      <a data-page="home" href="index.html"><span data-i18n="nav.home">home</span></a><span class="sep">/</span>
-      <a data-page="about" href="about.html"><span data-i18n="nav.about">about</span></a><span class="sep">/</span>
-      <a data-page="projects" href="projects.html"><span data-i18n="nav.projects">projects</span></a><span class="sep">/</span>
-      <a data-page="blog" href="blog.html"><span data-i18n="nav.blog">blog</span></a><span class="sep">/</span>
-      <a data-page="guestbook" href="guestbook.html"><span data-i18n="nav.guestbook">guestbook</span></a>
+<div class="statusbar">
+  <div class="statusbar-inner">
+    <a class="sb-session" href="index.html">6p</a>
+    <nav class="sb-tabs">
+      <a class="sb-tab" data-page="home" href="index.html"><span data-i18n="nav.home">home</span></a>
+      <a class="sb-tab" data-page="about" href="about.html"><span data-i18n="nav.about">about</span></a>
+      <a class="sb-tab" data-page="projects" href="projects.html"><span data-i18n="nav.projects">projects</span></a>
+      <a class="sb-tab" data-page="servers" href="servers.html"><span data-i18n="nav.servers">servers</span></a>
+      <a class="sb-tab" data-page="blog" href="blog.html"><span data-i18n="nav.blog">blog</span></a>
+      <a class="sb-tab" data-page="guestbook" href="guestbook.html"><span data-i18n="nav.guestbook">guestbook</span></a>
     </nav>
-    <div class="topright">
-      <div class="clock" id="clock">--:--</div>
+    <div class="sb-right">
+      <div id="authBox" class="ltr" style="display:flex;align-items:center;gap:6px;"></div>
+      <div class="sb-clock" id="clock">--:--</div>
+      <a class="design-switch" href="ghost/index.html">bento</a>
+      <button id="themeToggle" type="button">light</button>
       <button id="langToggle" type="button">AR</button>
     </div>
   </div>
 </div>
 
 <main>
-  <div class="wrap">
-    <div class="bento">
-      <div class="tile tile-hero">
-        <div class="tile-label">whoami</div>
-        <div class="hero-title glitch" data-text="MJ / 6P99">MJ / 6P99</div>
-        <p class="hero-sub prose" data-i18n="hero.answer">Discord bot developer.</p>
-      </div>
+  <section class="pane">
+    <div class="wrap reveal">
 
-      <div class="tile tile-status">
-        <div class="tile-label" data-i18n="status.label">live status</div>
-        <div class="ltr" id="lanyardBox">
-          <div class="status-fallback" data-i18n="status.connecting">connecting…</div>
+      <!-- ============ PROFILE CARD ============ -->
+      <div class="profile-card">
+        <div class="profile-banner"></div>
+        <div class="profile-avatar-row">
+          <div class="profile-avatar-wrap">
+            <img class="profile-avatar" id="pfAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="avatar">
+            <span class="profile-status-dot offline" id="pfStatusDot"></span>
+          </div>
+          <div class="profile-actions ltr">
+            <a class="pa-btn" href="https://github.com/6p99" target="_blank" rel="noopener">
+              <span class="label" data-i18n="pa.github">GitHub</span>
+            </a>
+            <a class="pa-btn primary" href="https://discord.com/users/803662340465229855" target="_blank" rel="noopener">
+              <span class="label" data-i18n="pa.message">Message</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-body">
+          <div class="ltr">
+            <div class="profile-name" id="pfName">MJ</div>
+            <div class="profile-handle" id="pfHandle">@6p_9</div>
+            <div class="profile-handle" id="pfActivity" style="margin-top:4px;"></div>
+          </div>
+
+          <div class="profile-badges ltr">
+            <div class="badge">M</div>
+            <div class="badge">J</div>
+            <div class="badge">H</div>
+            <div class="badge">O</div>
+            <div class="badge">L</div>
+          </div>
+
+          <div class="profile-divider"></div>
+
+          <div class="profile-section-label" data-i18n="profile.about.label">about me</div>
+          <p class="profile-about prose" data-i18n="hero.answer">Discord bot developer.</p>
+
+          <div class="profile-divider"></div>
+
+          <div class="profile-section-label" data-i18n="profile.connections.label">connections</div>
+          <div class="connections ltr">
+            <a class="connection" href="https://github.com/6p99" target="_blank" rel="noopener">
+              <div class="con-icon">GH</div>
+              <div class="con-text"><span class="con-name">GitHub</span><span class="con-meta">6p99</span></div>
+            </a>
+            <a class="connection" href="https://discord.gg/lanyard" target="_blank" rel="noopener">
+              <div class="con-icon">DC</div>
+              <div class="con-text"><span class="con-name">Discord</span><span class="con-meta">6p_9</span></div>
+            </a>
+          </div>
         </div>
       </div>
 
-      <div class="tile tile-stat">
-        <div class="tile-label" data-i18n="repos.label">repos</div>
-        <div class="stat-value ltr" id="repoCount">—</div>
+      <!-- ============ NAV TEASERS ============ -->
+      <div class="nav-grid" style="margin-top:20px;">
+        <a class="nav-card" href="about.html">
+          <div class="nc-num">01</div>
+          <div class="nc-title" data-i18n="home.nav.about.title">about</div>
+          <div class="nc-desc" data-i18n="home.nav.about.desc">identity.toml, live from GitHub</div>
+        </a>
+        <a class="nav-card" href="projects.html">
+          <div class="nc-num">02</div>
+          <div class="nc-title" data-i18n="home.nav.projects.title">projects</div>
+          <div class="nc-desc" data-i18n="home.nav.projects.desc">repos, pulled live from GitHub</div>
+        </a>
+        <a class="nav-card" href="blog.html">
+          <div class="nc-num">03</div>
+          <div class="nc-title" data-i18n="home.nav.blog.title">blog</div>
+          <div class="nc-desc" data-i18n="home.nav.blog.desc">notes and devlogs</div>
+        </a>
+        <a class="nav-card" href="guestbook.html">
+          <div class="nc-num">04</div>
+          <div class="nc-title" data-i18n="home.nav.guestbook.title">guestbook</div>
+          <div class="nc-desc" data-i18n="home.nav.guestbook.desc">leave a message</div>
+        </a>
       </div>
 
-      <div class="tile tile-stat">
-        <div class="tile-label" data-i18n="visits.label">visits</div>
-        <div class="stat-value ltr" id="visitCount">—</div>
-      </div>
-
-      <div class="tile tile-wide">
-        <div class="tile-label">stack.txt</div>
-        <div class="ltr">
-          <div class="marquee-row">
-            <div class="marquee-track dir-ltr">
-              <span class="lang-chip">Python</span><span class="lang-chip">JavaScript</span><span class="lang-chip">Java</span><span class="lang-chip">C#</span><span class="lang-chip">TypeScript</span><span class="lang-chip">C++</span><span class="lang-chip">C</span><span class="lang-chip">PHP</span>
-              <span class="lang-chip">Python</span><span class="lang-chip">JavaScript</span><span class="lang-chip">Java</span><span class="lang-chip">C#</span><span class="lang-chip">TypeScript</span><span class="lang-chip">C++</span><span class="lang-chip">C</span><span class="lang-chip">PHP</span>
-            </div>
-          </div>
-          <div class="marquee-row">
-            <div class="marquee-track dir-rtl">
-              <span class="lang-chip">Go</span><span class="lang-chip">Swift</span><span class="lang-chip">Kotlin</span><span class="lang-chip">SQL</span><span class="lang-chip">Rust</span><span class="lang-chip">Ruby</span><span class="lang-chip">R</span>
-              <span class="lang-chip">Go</span><span class="lang-chip">Swift</span><span class="lang-chip">Kotlin</span><span class="lang-chip">SQL</span><span class="lang-chip">Rust</span><span class="lang-chip">Ruby</span><span class="lang-chip">R</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <a class="tile tile-nav" href="about.html">
-        <div class="nc-num">01</div>
-        <div class="nc-title" data-i18n="home.nav.about.title">about</div>
-        <div class="nc-desc" data-i18n="home.nav.about.desc">identity.toml, live from GitHub</div>
-      </a>
-      <a class="tile tile-nav" href="projects.html">
-        <div class="nc-num">02</div>
-        <div class="nc-title" data-i18n="home.nav.projects.title">projects</div>
-        <div class="nc-desc" data-i18n="home.nav.projects.desc">repos, pulled live from GitHub</div>
-      </a>
-      <a class="tile tile-nav" href="blog.html">
-        <div class="nc-num">03</div>
-        <div class="nc-title" data-i18n="home.nav.blog.title">blog</div>
-        <div class="nc-desc" data-i18n="home.nav.blog.desc">notes and devlogs</div>
-      </a>
-      <a class="tile tile-nav" href="guestbook.html">
-        <div class="nc-num">04</div>
-        <div class="nc-title" data-i18n="home.nav.guestbook.title">guestbook</div>
-        <div class="nc-desc" data-i18n="home.nav.guestbook.desc">leave a message</div>
-      </a>
     </div>
-  </div>
+  </section>
 </main>
 
 <footer class="ltr">
   <div class="footer-links">
     <a href="https://github.com/6p99" target="_blank" rel="noopener">GitHub</a>
     <a href="https://discord.gg/lanyard" target="_blank" rel="noopener">Discord</a>
+  </div>
+  <div class="ltr" style="margin-top:10px; font-size:11px; color:var(--dimmer);">
+    <span id="visitCount">—</span> <span data-i18n="visits.label">visits</span>
   </div>
 </footer>
 

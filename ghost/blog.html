@@ -11,23 +11,23 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="blog">
-<div class="grain"></div>
+<div class="noise"></div>
 
-<div class="statusbar">
-  <div class="statusbar-inner">
-    <a class="sb-session" href="index.html">6p</a>
-    <nav class="sb-tabs">
-      <a class="sb-tab" data-page="home" href="index.html"><span data-i18n="nav.home">home</span></a>
-      <a class="sb-tab" data-page="about" href="about.html"><span data-i18n="nav.about">about</span></a>
-      <a class="sb-tab" data-page="projects" href="projects.html"><span data-i18n="nav.projects">projects</span></a>
-      <a class="sb-tab" data-page="servers" href="servers.html"><span data-i18n="nav.servers">servers</span></a>
-      <a class="sb-tab" data-page="blog" href="blog.html"><span data-i18n="nav.blog">blog</span></a>
-      <a class="sb-tab" data-page="guestbook" href="guestbook.html"><span data-i18n="nav.guestbook">guestbook</span></a>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">6P99</div>
+    <nav class="navlinks">
+      <a data-page="home" href="index.html"><span data-i18n="nav.home">home</span></a><span class="sep">/</span>
+      <a data-page="about" href="about.html"><span data-i18n="nav.about">about</span></a><span class="sep">/</span>
+      <a data-page="projects" href="projects.html"><span data-i18n="nav.projects">projects</span></a><span class="sep">/</span>
+      <a data-page="servers" href="servers.html"><span data-i18n="nav.servers">servers</span></a><span class="sep">/</span>
+      <a data-page="blog" href="blog.html"><span data-i18n="nav.blog">blog</span></a><span class="sep">/</span>
+      <a data-page="guestbook" href="guestbook.html"><span data-i18n="nav.guestbook">guestbook</span></a>
     </nav>
-    <div class="sb-right">
+    <div class="topright">
       <div id="authBox" class="ltr" style="display:flex;align-items:center;gap:6px;"></div>
-      <div class="sb-clock" id="clock">--:--</div>
-      <a class="design-switch" href="ghost/blog.html">bento</a>
+      <div class="clock" id="clock">--:--</div>
+      <a class="design-switch" href="../blog.html">card</a>
       <button id="themeToggle" type="button">light</button>
       <button id="langToggle" type="button">AR</button>
     </div>
@@ -35,12 +35,12 @@
 </div>
 
 <main>
-  <section class="pane">
-    <div class="wrap reveal">
+  <div class="wrap">
+    <div class="page-head">
       <h1 class="page-title" data-i18n="blog.title">blog</h1>
-      <p class="page-lede prose" data-i18n="blog.lede">Devlogs and notes</p>
-
-      <div class="card">
+    </div>
+    <div class="bento" style="margin-top:20px;">
+      <div class="tile tile-full">
         <div class="empty-state">
           <div class="glyph">[ ]</div>
           <div style="font-weight:700; color:var(--white); margin-bottom:6px;" data-i18n="blog.empty.title">nothing published yet</div>
@@ -48,16 +48,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </main>
 
 <footer class="ltr">
   <div class="footer-links">
     <a href="https://github.com/6p99" target="_blank" rel="noopener">GitHub</a>
     <a href="https://discord.gg/lanyard" target="_blank" rel="noopener">Discord</a>
-  </div>
-  <div class="ltr" style="margin-top:10px; font-size:11px; color:var(--dimmer);">
-    <span id="visitCount">—</span> <span data-i18n="visits.label">visits</span>
   </div>
 </footer>
 

@@ -15,18 +15,17 @@ export async function onRequestGet({ env }) {
 
 export async function onRequestPost({ env, request }) {
   try {
-    const userIP = request.headers.get("CF-Connecting-IP") || "anonymous";
-    const rateLimitKey = `limit:${userIP}`;
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    const body = await request.json();
 
-    const hasCommented = await env.GUESTBOOK_KV.get(rateLimitKey);
-    if (hasCommented) {
-      return new Response(JSON.stringify({ error: 'rate_limited', message: 'يمكنك كتابة تعليق واحد فقط كل 24 ساعة.' }), {
-        status: 429,
+    const honeypot = (body.hp || '').toString();
+    if (honeypot) {
+      return new Response(JSON.stringify({ error: 'rejected' }), {
+        status: 400,
         headers: { 'content-type': 'application/json' }
       });
     }
 
-    const body = await request.json();
     const name = (body.name || '').toString().trim().slice(0, 40);
     const msg = (body.msg || '').toString().trim().slice(0, 300);
 
@@ -37,13 +36,22 @@ export async function onRequestPost({ env, request }) {
       });
     }
 
+    const rlKey = `rl_gb_${ip}`;
+    const rl = await env.GUESTBOOK_KV.get(rlKey);
+    if (rl) {
+      return new Response(JSON.stringify({ error: 'rate_limited' }), {
+        status: 429,
+        headers: { 'content-type': 'application/json' }
+      });
+    }
+
     const raw = await env.GUESTBOOK_KV.get('entries');
     const entries = raw ? JSON.parse(raw) : [];
     entries.push({ name, msg, time: Date.now() });
     while (entries.length > 200) entries.shift();
 
     await env.GUESTBOOK_KV.put('entries', JSON.stringify(entries));
-    await env.GUESTBOOK_KV.put(rateLimitKey, 'true', { expirationTtl: 86400 });
+    await env.GUESTBOOK_KV.put(rlKey, '1', { expirationTtl: 30 });
 
     return new Response(JSON.stringify(entries), {
       headers: { 'content-type': 'application/json' }

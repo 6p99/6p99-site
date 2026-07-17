@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>servers — 6p99</title>
+<meta name="description" content="MJ (6p99) — servers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="servers">
+<div class="noise"></div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">6P99</div>
+    <nav class="navlinks">
+      <a data-page="home" href="index.html"><span data-i18n="nav.home">home</span></a><span class="sep">/</span>
+      <a data-page="about" href="about.html"><span data-i18n="nav.about">about</span></a><span class="sep">/</span>
+      <a data-page="projects" href="projects.html"><span data-i18n="nav.projects">projects</span></a><span class="sep">/</span>
+      <a data-page="servers" href="servers.html"><span data-i18n="nav.servers">servers</span></a><span class="sep">/</span>
+      <a data-page="blog" href="blog.html"><span data-i18n="nav.blog">blog</span></a><span class="sep">/</span>
+      <a data-page="guestbook" href="guestbook.html"><span data-i18n="nav.guestbook">guestbook</span></a>
+    </nav>
+    <div class="topright">
+      <div id="authBox" class="ltr" style="display:flex;align-items:center;gap:6px;"></div>
+      <div class="clock" id="clock">--:--</div>
+      <a class="design-switch" href="../servers.html">card</a>
+      <button id="themeToggle" type="button">light</button>
+      <button id="langToggle" type="button">AR</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div class="page-head">
+      <h1 class="page-title" data-i18n="servers.title">servers</h1>
+    </div>
+    <div class="bento" style="margin-top:20px;">
+      <div class="tile tile-full" id="serverAddWrap" style="display:none;">
+        <form class="gb-form ltr" id="serverAddForm">
+          <input type="text" id="srvInvite" data-i18n-placeholder="srv.invite.placeholder" placeholder="invite link or code" required>
+          <input type="text" id="srvDesc" data-i18n-placeholder="srv.desc.placeholder" placeholder="short description (optional)">
+          <button type="submit" data-i18n="srv.submit">add server</button>
+        </form>
+        <div id="srvAddNotice" class="status-fallback ltr" style="margin-top:10px;"></div>
+      </div>
+      <div class="tile tile-full">
+        <div id="serverGrid" style="display:flex; flex-direction:column; gap:12px;"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="ltr">
+  <div class="footer-links">
+    <a href="https://github.com/6p99" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://discord.gg/lanyard" target="_blank" rel="noopener">Discord</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
